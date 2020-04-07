@@ -1,0 +1,2 @@
+class Ingridient < ApplicationRecord
+end
