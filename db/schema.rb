@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 12) do
 
   create_table "ingridients", force: :cascade do |t|
     t.integer "recipe_id"
-    t.string "label", null: false
+    t.string "label"
     t.string "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 12) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title"
     t.text "description"
-    t.time "duration"
+    t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
