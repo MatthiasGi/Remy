@@ -1,12 +1,16 @@
 !!!
-%html
+%html.h-100
   %head
-    %title Remy
+    %title Rémy
     = csrf_meta_tags
     = csp_meta_tag
 
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-  %body
+  %body.h-100
+    %nav.navbar.navbar-dark.bg-dark.navbar-expand
+      %a.navbar-brand{href: '/'}
+        %i.fas.fa-blender-phone
+
     = yield

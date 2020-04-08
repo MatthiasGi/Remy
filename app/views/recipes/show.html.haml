@@ -1,0 +1,8 @@
+= render layout: 'list' do
+  %h1= @recipe.title
+  %p= @recipe.description
+  %p
+    %i.far.fa-clock
+    = duration @recipe
+  = link_to recipecook_url(@recipe), class: 'btn btn-primary btn-lg btn-block' do
+    = t '.cook'

@@ -1,0 +1,6 @@
+de:
+  recipes:
+    list:
+      select_recipe: Bitte ein Rezept links auswählen.
+      no_recipes: Keine Rezepte verfügbar!
+      cook: Kochen

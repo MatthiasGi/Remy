@@ -1,0 +1,10 @@
+.recipes-list-container
+  .recipes-list-column.p-2
+    - if @recipes.any?
+      %nav.nav.flex-column.nav-pills
+        - @recipes.each do |recipe|
+          = link_to recipe.title, recipe_url(recipe), class: 'nav-item nav-link' + (@recipe == recipe ? ' active' : '')
+    - else
+      .alert.alert-secondary= t '.no_recipes'
+  .recipes-list-column.p-2
+    = yield

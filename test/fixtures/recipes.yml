@@ -1,2 +1,15 @@
 default:
   title: "Testtitel"
+
+full:
+  title: "Testtitel der Zweite"
+  description: "Dies ist ein längerer Testtext, der das Rezept beschreibt."
+  duration: 3930
+
+minutes:
+  title: "Minutensteaks"
+  duration: 123
+
+seconds:
+  title: "Sekundenschnell"
+  duration: 5
