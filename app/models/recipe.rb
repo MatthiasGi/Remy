@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+  has_many :ingridients, dependent: :destroy
   has_one_attached :image
 
   validates :title, presence: true

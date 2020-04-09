@@ -39,4 +39,21 @@ class RecipeTest < ActiveSupport::TestCase
     act = ActiveStorage::Blob.service.send(:path_for, recipes(:full).image.key)
     assert FileUtils.identical?(@image, act)
   end
+
+  test "ingridients are linked and get deleted together" do
+    recipe = recipes(:default)
+    ingridients = []
+    3.times do |i|
+      ingridient = Ingridient.new(label: "Ingridient %d" % i, recipe: recipe)
+      ingridient.save
+      ingridients << ingridient
+    end
+    assert_equal ingridients, recipe.ingridients.to_a
+
+    recipe.destroy
+    assert_not Recipe.find_by(id: recipe.id)
+    ingridients.each do |ingridient|
+      assert_not Ingridient.find_by(id: ingridient.id)
+    end
+  end
 end
