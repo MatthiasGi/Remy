@@ -1,4 +1,6 @@
 = render layout: 'list' do
+  - if @recipe.image.attached?
+    = image_tag @recipe.image, class: 'img-thumbnail d-block mx-auto my-2 mw-75 h-auto'
   %h1= @recipe.title
   %p= @recipe.description
   %p
