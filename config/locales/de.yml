@@ -4,3 +4,8 @@ de:
       select_recipe: Bitte ein Rezept links auswählen.
       no_recipes: Keine Rezepte verfügbar!
       cook: Kochen
+
+    steps:
+      forward: Weiter
+      back: Zurück
+      ingridients: Zutaten

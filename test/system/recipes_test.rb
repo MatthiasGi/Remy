@@ -52,9 +52,19 @@ class RecipesTest < ApplicationSystemTestCase
     assert_selector 'a.nav-item.active', text: title
   end
 
-  test "clicking on cook-button opens cook-interface" do
-    visit recipe_url(recipes(:full))
+  test "clicking on cook-button opens cook-interface with ingridients" do
+    recipe = recipes(:full)
+    visit recipe_url(recipe)
     click_on I18n.t('recipes.list.cook')
-    assert_equal recipecook_path(recipes(:full)), current_path
+    assert_equal recipe_cook_path(recipe), current_path
+
+    recipe.ingridients.each do |ingridient|
+      assert_text ingridient.quantity
+      assert_text ingridient.label
+    end
+
+    # Back and forward buttons
+    assert_selector :xpath, '//a[contains(@href, "%s")]' % recipe_path(recipe)
+    assert_selector :xpath, '//a[contains(@href, "%s")]' % recipe_step_path(recipe, 1)
   end
 end

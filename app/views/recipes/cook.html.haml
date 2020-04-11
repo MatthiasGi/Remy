@@ -1,1 +1,11 @@
-%h1 TODO
+= render layout: 'steps' do
+  %h1= @recipe.title
+  %h2.text-muted= t('.ingridients')
+  %hr/
+
+  %table.table.table-striped.table-borderless.table-responsive
+    %tbody
+      - @recipe.ingridients.each do |ingridient|
+        %tr
+          %td= ingridient.quantity
+          %td= ingridient.label

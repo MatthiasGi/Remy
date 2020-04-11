@@ -1,9 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+full_i1:
+  recipe: full
+  quantity: 1 EL
+  label: Zitronensaft
 
-one:
-  label: MyString
-  quantity: MyString
+full_i2:
+  recipe: full
+  quantity: 500g
+  label: Mehl
 
-two:
-  label: MyString
-  quantity: MyString
+full_i3:
+  recipe: full
+  label: Wasser
