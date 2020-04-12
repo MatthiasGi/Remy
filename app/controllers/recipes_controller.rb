@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   end
 
   def cook
-    @recipe = Recipe.find_by(id: params[:id]) or redirect_to recipes_url
+    @recipe = Recipe.find_by(id: params[:id]) or return redirect_to recipes_url
     @url_back = recipe_url(@recipe)
     @url_forward = recipe_step_url(@recipe, 1)
   end
