@@ -6,7 +6,9 @@
     %i.fas.fa-angle-left
     = t '.back'
 
-  .flex-grow-1
+  .flex-grow-1.text-center
+    - if @meta[:step_current]
+      %p.text-muted #{@meta[:step_current]}/#{@meta[:steps_total]}
 
   %a.btn.btn-outline-primary{href: @meta[:url_forward]}
     = t '.forward'

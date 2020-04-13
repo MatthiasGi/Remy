@@ -59,12 +59,35 @@ class RecipesTest < ApplicationSystemTestCase
     assert_equal recipe_cook_path(recipe), current_path
 
     recipe.ingridients.each do |ingridient|
-      assert_text ingridient.quantity
+      ingridient.quantity.nil? or assert_text ingridient.quantity
       assert_text ingridient.label
     end
 
     # Back and forward buttons
     assert_selector :xpath, '//a[contains(@href, "%s")]' % recipe_path(recipe)
     assert_selector :xpath, '//a[contains(@href, "%s")]' % recipe_step_path(recipe, 1)
+  end
+
+  test "clicking through step_view" do
+    recipe = recipes(:full)
+    visit recipe_cook_url(recipe)
+    click_on I18n.t('recipes.steps.forward')
+
+    assert_equal recipe_step_path(recipe, 1), current_path
+    assert_text steps(:full_s1).description
+    assert_text '1/3'
+    click_on I18n.t('recipes.steps.forward')
+
+    assert_equal recipe_step_path(recipe, 2), current_path
+    assert_text steps(:full_s2).description
+    assert_text '2/3'
+    click_on I18n.t('recipes.steps.forward')
+
+    assert_equal recipe_step_path(recipe, 3), current_path
+    assert_text steps(:full_s3).description
+    assert_text '3/3'
+    click_on I18n.t('recipes.steps.forward')
+
+    assert_equal recipes_path, current_path
   end
 end
