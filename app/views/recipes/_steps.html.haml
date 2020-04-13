@@ -2,12 +2,12 @@
   = yield
 
 %nav.navbar.navbar-light.bg-light.navbar-expand
-  %a.btn.btn-outline-secondary{href: @url_back}
+  %a.btn.btn-outline-secondary{href: @meta[:url_back]}
     %i.fas.fa-angle-left
     = t '.back'
 
   .flex-grow-1
 
-  %a.btn.btn-outline-primary{href: @url_forward}
+  %a.btn.btn-outline-primary{href: @meta[:url_forward]}
     = t '.forward'
     %i.fas.fa-angle-right

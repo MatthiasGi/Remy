@@ -35,8 +35,8 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   test "cook view should assign back and forward urls" do
     recipe = recipes(:full)
     get recipe_cook_url(recipe)
-    assert_equal recipe_url(recipe), assigns(:url_back)
-    assert_equal recipe_step_url(recipe, 1), assigns(:url_forward)
+    assert_equal recipe_url(recipe), assigns(:meta)[:url_back]
+    assert_equal recipe_step_url(recipe, 1), assigns(:meta)[:url_forward]
   end
 
   test "step view should display correct step in order of number" do
@@ -45,23 +45,26 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     get recipe_step_url(recipe, 1)
     assert_equal recipe, assigns(:recipe)
     assert_equal steps(:full_s1), assigns(:step)
-    assert_equal recipe_cook_url(recipe), assigns(:url_back)
-    assert_equal recipe_step_url(recipe, 2), assigns(:url_forward)
-    assert_equal 1, assigns(:step_number)
+    assert_equal recipe_cook_url(recipe), assigns(:meta)[:url_back]
+    assert_equal recipe_step_url(recipe, 2), assigns(:meta)[:url_forward]
+    assert_equal 1, assigns(:meta)[:step_current]
+    assert_equal 3, assigns(:meta)[:steps_total]
 
     get recipe_step_url(recipe, 2)
     assert_equal recipe, assigns(:recipe)
     assert_equal steps(:full_s2), assigns(:step)
-    assert_equal recipe_step_url(recipe, 1), assigns(:url_back)
-    assert_equal recipe_step_url(recipe, 3), assigns(:url_forward)
-    assert_equal 2, assigns(:step_number)
+    assert_equal recipe_step_url(recipe, 1), assigns(:meta)[:url_back]
+    assert_equal recipe_step_url(recipe, 3), assigns(:meta)[:url_forward]
+    assert_equal 2, assigns(:meta)[:step_current]
+    assert_equal 3, assigns(:meta)[:steps_total]
 
     get recipe_step_url(recipe, 3)
     assert_equal recipe, assigns(:recipe)
     assert_equal steps(:full_s3), assigns(:step)
-    assert_equal recipe_step_url(recipe, 2), assigns(:url_back)
-    assert_equal recipes_url, assigns(:url_forward)
-    assert_equal 3, assigns(:step_number)
+    assert_equal recipe_step_url(recipe, 2), assigns(:meta)[:url_back]
+    assert_equal recipes_url, assigns(:meta)[:url_forward]
+    assert_equal 3, assigns(:meta)[:step_current]
+    assert_equal 3, assigns(:meta)[:steps_total]
   end
 
   test "step view should redirect to index on wrong recipe number" do

@@ -1,36 +1,40 @@
 class RecipesController < ApplicationController
-  def index
-    @recipes = Recipe.all
-  end
+  before_action :get_recipes, only: [:index, :show]
+  before_action :get_recipe, only: [:show, :cook, :step]
 
-  def show
-    @recipes = Recipe.all
-    @recipe = Recipe.find_by(id: params[:id]) or redirect_to recipes_url
-  end
+  def index; end
+
+  def show; end
 
   def cook
-    @recipe = Recipe.find_by(id: params[:id]) or return redirect_to recipes_url
-    @url_back = recipe_url(@recipe)
-    @url_forward = recipe_step_url(@recipe, 1)
+    @meta = {
+      'url_back': recipe_url(@recipe),
+      'url_forward': recipe_step_url(@recipe, 1)
+    }
   end
 
   def step
     @recipe = Recipe.find_by(id: params[:id]) or return redirect_to recipes_url
-    @step_number = params[:step].to_i
-    if @step_number < 1 or @step_number > @recipe.steps.count
-      return redirect_to recipe_url(@recipe)
-    end
-    @step = @recipe.steps.order(:number)[@step_number - 1]
 
-    if @step_number > 1
-      @url_back = recipe_step_url(@recipe, @step_number - 1)
-    else
-      @url_back = recipe_cook_url(@recipe)
-    end
-    if @step_number < @recipe.steps.count
-      @url_forward = recipe_step_url(@recipe, @step_number + 1)
-    else
-      @url_forward = recipes_url
-    end
+    i = params[:step].to_i
+    total = @recipe.steps.count
+    i.between? 1, total or return redirect_to recipe_url(@recipe)
+    @meta = {'step_current': i, 'steps_total': total}
+
+    @step = @recipe.steps.order(:number)[i-1]
+    @meta[:url_back] = i > 1 ? recipe_step_url(@recipe, i - 1)
+                             : recipe_cook_url(@recipe)
+    @meta[:url_forward] = i < total ? recipe_step_url(@recipe, i + 1)
+                                    : recipes_url
+  end
+
+  private
+
+  def get_recipes
+    @recipes = Recipe.all
+  end
+
+  def get_recipe
+    @recipe = Recipe.find_by(id: params[:id]) or redirect_to recipes_url
   end
 end
