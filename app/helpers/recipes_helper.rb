@@ -1,7 +1,7 @@
 module RecipesHelper
 
   # Gibt die Dauer eines Rezepts schön formatiert aus, also als Zeichenkette
-  # der Art "H:MM:SS".
+  #   der Art "H:MM:SS".
   def duration(recipe)
     dur = recipe.duration or return ""
 
