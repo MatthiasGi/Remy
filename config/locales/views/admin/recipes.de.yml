@@ -1,0 +1,13 @@
+de:
+  admin:
+    recipes:
+      index:
+        title: Rezepte verwalten
+        lead:
+          zero: Es werden zur Zeit keine Rezepte verwaltet.
+          one: Es wird zur Zeit ein Rezept verwaltet.
+          other: Es werden zur Zeit %{count} Rezepte verwaltet.
+
+      edit:
+        delete:
+          confirm: Damit wird das Rezept mit allen Schritten gelöscht.

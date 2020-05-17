@@ -1,4 +1,11 @@
 de:
+  defaults:
+    abort: Abbrechen
+    delete: Löschen
+    edit: Bearbeiten
+    save: Speichern
+    add: Hinzufügen
+
   recipes:
     list:
       select_recipe: Bitte ein Rezept links auswählen.
@@ -9,3 +16,16 @@ de:
       forward: Weiter
       back: Zurück
       ingridients: Zutaten
+
+  activerecord:
+    models:
+      recipe:
+        one: Rezept
+        other: Rezepte
+    attributes:
+      recipe:
+        title: Titel
+        description: Beschreibung
+        duration: Dauer
+        steps: Schritte
+        image: Bild
