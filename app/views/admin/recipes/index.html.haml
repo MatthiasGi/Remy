@@ -1,0 +1,23 @@
+%h1= t '.title'
+%p.lead
+  = t '.lead', count: @recipes.count
+  = link_to new_admin_recipe_url, class: 'btn btn-success float-right' do
+    %i.far.fa-plus-square
+    = t 'defaults.add'
+
+- if @recipes.any?
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= Recipe.human_attribute_name :title
+        %th= Recipe.human_attribute_name :steps
+        %th
+    %tbody
+      - @recipes.each do |recipe|
+        %tr
+          %td= recipe.title
+          %td= recipe.steps.count
+          %td
+            = link_to edit_admin_recipe_url(recipe), class: 'btn btn-light btn-sm' do
+              %i.far.fa-edit
+              = t 'defaults.edit'

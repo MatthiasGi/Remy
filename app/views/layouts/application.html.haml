@@ -13,4 +13,8 @@
       %a.navbar-brand{href: '/'}
         %i.fas.fa-blender-phone
 
+      %ul.navbar-nav.mr-auto
+        %li.nav-item
+          = link_to 'Administration', admin_recipes_url, class: 'nav-link'
+
     = yield

@@ -1,0 +1,30 @@
+= simple_form_for [:admin, @recipe], wrapper: :horizontal_form, |
+    wrapper_mappings: { |
+      file:          :custom_horizontal_file, |
+    } do |f| |
+  = f.input :title
+  = f.input :description
+  = f.input :duration
+  = f.input :image
+
+  %hr.offset-md-3
+
+  -# TODO: Einzelne Schritte kommen hier hin.
+
+  %hr.offset-md-3
+
+  .form-row
+    .col-md-3.offset-md-3.col-4
+      = f.button :button, class: 'btn btn-primary btn-block btn-lg' do
+        %i.far.fa-save
+        = t 'defaults.save'
+
+    .col-md-3.col-4
+      = link_to admin_recipe_path(@recipe), method: :delete, class: 'btn btn-danger btn-block btn-lg', data: {confirm: t('.delete.confirm')} do
+        %i.far.fa-trash-alt
+        = t 'defaults.delete'
+
+    .col-md-3.col-4
+      = link_to admin_recipes_path, class: 'btn btn-light btn-block btn-lg' do
+        %i.far.fa-window-close
+        = t 'defaults.abort'
