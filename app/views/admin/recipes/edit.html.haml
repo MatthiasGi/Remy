@@ -6,6 +6,10 @@
   = f.input :description
   = f.input :duration
   = f.input :image
+  - if @recipe.image.attached?
+    .form-row
+      .offset-sm-3.col-sm-9.text-center
+        = image_tag @recipe.image, class: 'img-thumbnail'
 
   %hr.offset-md-3
 
